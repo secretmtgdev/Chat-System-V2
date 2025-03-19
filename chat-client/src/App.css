@@ -1,0 +1,25 @@
+:root {
+    --meta-blue: #0866ff;
+    --meta-white: #ffffff;
+    --meta-grey: #e2e5e9;
+    --meta-grey-2: #d1d4d9;
+}
+
+.button {
+    height: 45px;
+    width: 150px;
+    border-radius: 25px;
+    border: 1px solid var(--meta-blue);
+    background-color: var(--meta-white);
+    transition: 0.15s;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: var(--meta-white);
+    background-color: var(--meta-blue);
+}
+
+.icon-blue {
+    color: var(--meta-blue);
+}

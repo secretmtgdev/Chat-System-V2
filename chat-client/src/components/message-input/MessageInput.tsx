@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { faFaceSmile } from '@fortawesome/free-solid-svg-icons';
+
+import './MessageInput.css';
+import IconWrapper from '../icon-wrapper/IconWrapper';
 
 export interface MessageInputProps {
     onClickHandler: () => void;
@@ -6,23 +10,40 @@ export interface MessageInputProps {
 
 const MessageInput = ({ onClickHandler }: MessageInputProps) => {
     const [message, setMessage] = useState<string>('');
-    const handleOnClick = () => {
+    const messageRef = useRef<HTMLDivElement>(null);
+    const sendMessage = () => {
         onClickHandler.call(this);
         setMessage('');
+        if (messageRef.current) {
+            messageRef.current.innerHTML = '';
+        }
     };
+
+    // This should be split into its own component
+    // For now we'll just stub it out
+    const pickEmoji = () => {}
 
     return (
         <div className='message-input'>
-            <label htmlFor='message'>Type a message</label>
-            <textarea 
-                id='message'
-                name='message'
-                rows={5}
-                cols={33}
-                value={message}
-                onChange={e => setMessage(e.target.value)}>
-            </textarea>
-            <button className='button' type='button' onClick={handleOnClick}>Send message</button>
+            <div className='message-input-text'>
+                <div 
+                    className='message-content'
+                    aria-label='Message'
+                    aria-placeholder='message'
+                    contentEditable={true}
+                    role='textbox'
+                    spellCheck={true}
+                    tabIndex={0}
+                    data-lexical-editor={true}
+                    ref={messageRef}
+                >
+                    <p dir={'ltr'}>
+                        <span data-lexical-text={true}></span>
+                    </p>
+                </div>
+                <IconWrapper icon={faFaceSmile} onClickHandler={pickEmoji} />
+            </div>
+            <button className='button' type='button' onClick={sendMessage}>Send message</button>
         </div>
     )
 };

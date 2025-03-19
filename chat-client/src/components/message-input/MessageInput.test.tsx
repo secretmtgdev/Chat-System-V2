@@ -17,14 +17,14 @@ describe('Test MessageInput functionality', () => {
         test('Updates the input field as a user types', () => {
             render(<MessageInput onClickHandler={mockOnSend}  />);
             const expectedMessage = 'Thanks for tagging along';
-            const messageText: HTMLTextAreaElement = screen.getByRole('textbox');
-            fireEvent.change(messageText, {
+            const messageText: HTMLDivElement = screen.getByRole('textbox');
+            fireEvent.input(messageText, {
                 target: {
-                    value: expectedMessage
+                    textContent: expectedMessage
                 }
             });
         
-            expect(messageText.value).toBe(expectedMessage);
+            expect(messageText).toHaveTextContent(expectedMessage);
         });
     });
 
@@ -35,20 +35,20 @@ describe('Test MessageInput functionality', () => {
 
         test('Clears the input field after sending message', async () => {
             render(<MessageInput onClickHandler={mockOnSend} />);
-            const messageText: HTMLTextAreaElement = screen.getByRole('textbox');
+            const messageText = screen.getByRole('textbox');
             const sendButton: HTMLButtonElement = screen.getByRole('button', {
                 name: /send message/i
             });
 
-            fireEvent.change(messageText, {
+            fireEvent.input(messageText, {
                 target: {
-                    value: 'Thanks for tagging along'
+                    textContent: 'Thanks for tagging along'
                 }
             });
             
             fireEvent.click(sendButton);
             expect(mockOnSend).toHaveBeenCalledTimes(1);
-            await waitFor(() => expect(messageText).toHaveValue(''));
+            await waitFor(() => expect(messageText).toHaveTextContent(''));
         });
     });
 });

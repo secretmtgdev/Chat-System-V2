@@ -1,0 +1,9 @@
+.icon-wrapper {
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.icon-wrapper:hover {
+    cursor: pointer;
+    background-color: var(--meta-grey-2);
+}

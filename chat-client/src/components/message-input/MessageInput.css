@@ -1,0 +1,32 @@
+.message-input {
+    border: 1px solid black;
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    max-width: 450px;
+    max-height: 250px;
+    justify-content: space-around;
+
+    /* flex will stretch by default leading to an odd button */
+    align-items: center; 
+}
+
+.message-input-text {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    background-color: var(--meta-grey);
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.message-content {
+    width: 200px;
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    /* Get rid of the focused outline on focus */
+    outline: none;
+}
